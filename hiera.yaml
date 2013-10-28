@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:hierarchy:
+  - "%{fqdn}"
+  - common
+:yaml:
+  :datadir: './hiera_data'

@@ -1,0 +1,146 @@
+{
+  "name": "theforeman-foreman",
+  "version": "1.3.0",
+  "source": "git://github.com/theforeman/puppet-foreman",
+  "author": "theforeman",
+  "license": "GPLv3+",
+  "summary": "Foreman server configuration",
+  "description": "Module for configuring Foreman",
+  "project_page": "http://github.com/theforeman/foreman-installer",
+  "dependencies": [
+    {
+      "name": "theforeman/apache",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "theforeman/concat_native",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "theforeman/passenger",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "puppetlabs/postgresql",
+      "version_requirement": ">= 2.2.0"
+    },
+    {
+      "name": "puppetlabs/stdlib"
+    }
+  ],
+  "types": [
+    {
+      "name": "foreman_smartproxy",
+      "doc": "foreman_smartproxy registers a smartproxy in foreman.",
+      "properties": [
+        {
+          "name": "ensure",
+          "doc": "The basic property that the resource should be in.  Valid values are `present`, `absent`."
+        },
+        {
+          "name": "url",
+          "doc": "The url of the smartproxy  Values can match `/\n        ([a-zA-Z][\\-+.a-zA-Z\\d]*):                           (?# 1: scheme)\n        (?:\n           ((?:[\\-_.!~*'()a-zA-Z\\d;?:@&=+$,]|%[a-fA-F\\d]{2})(?:[\\-_.!~*'()a-zA-Z\\d;\\/?:@&=+$,\\[\\]]|%[a-fA-F\\d]{2})*)                    (?# 2: opaque)\n        |\n           (?:(?:\n             \\/\\/(?:\n                 (?:(?:((?:[\\-_.!~*'()a-zA-Z\\d;:&=+$,]|%[a-fA-F\\d]{2})*)@)?        (?# 3: userinfo)\n                   (?:((?:(?:[a-zA-Z0-9\\-.]|%\\h\\h)+|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|\\[(?:(?:[a-fA-F\\d]{1,4}:)*(?:[a-fA-F\\d]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})|(?:(?:[a-fA-F\\d]{1,4}:)*[a-fA-F\\d]{1,4})?::(?:(?:[a-fA-F\\d]{1,4}:)*(?:[a-fA-F\\d]{1,4}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}))?)\\]))(?::(\\d*))?))? (?# 4: host, 5: port)\n               |\n                 ((?:[\\-_.!~*'()a-zA-Z\\d$,;:@&=+]|%[a-fA-F\\d]{2})+)                 (?# 6: registry)\n               )\n             |\n             (?!\\/\\/))                           (?# XXX: '\\/\\/' is the mark for hostport)\n             (\\/(?:[\\-_.!~*'()a-zA-Z\\d:@&=+$,]|%[a-fA-F\\d]{2})*(?:;(?:[\\-_.!~*'()a-zA-Z\\d:@&=+$,]|%[a-fA-F\\d]{2})*)*(?:\\/(?:[\\-_.!~*'()a-zA-Z\\d:@&=+$,]|%[a-fA-F\\d]{2})*(?:;(?:[\\-_.!~*'()a-zA-Z\\d:@&=+$,]|%[a-fA-F\\d]{2})*)*)*)?                    (?# 7: path)\n           )(?:\\?((?:[\\-_.!~*'()a-zA-Z\\d;\\/?:@&=+$,\\[\\]]|%[a-fA-F\\d]{2})*))?                 (?# 8: query)\n        )\n        (?:\\#((?:[\\-_.!~*'()a-zA-Z\\d;\\/?:@&=+$,\\[\\]]|%[a-fA-F\\d]{2})*))?                  (?# 9: fragment)\n      /x`."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "name",
+          "doc": "The name of the smartproxy."
+        },
+        {
+          "name": "base_url",
+          "doc": "Foreman's base url."
+        },
+        {
+          "name": "effective_user",
+          "doc": "Foreman's effective user for the registration (usually admin)."
+        },
+        {
+          "name": "consumer_key",
+          "doc": "Foreman oauth consumer_key"
+        },
+        {
+          "name": "consumer_secret",
+          "doc": "Foreman oauth consumer_secret"
+        }
+      ],
+      "providers": [
+        {
+          "name": "rest",
+          "doc": ""
+        }
+      ]
+    }
+  ],
+  "checksums": {
+    "Gemfile": "555cf2367c25de0ce4f4a59470f75c76",
+    "LICENSE": "9eef91148a9b14ec7f9df333daebc746",
+    "Modulefile": "f7e7ee402e3e352be1daaa8ec71f39a0",
+    "README.md": "76004e30b684da514d0bedfd3a67cf18",
+    "Rakefile": "8a602dae0322ee4e370c8ec94db13b9b",
+    "lib/puppet/feature/foreman_api.rb": "e09f53897c5c1c06cd77012cf63f907f",
+    "lib/puppet/parser/functions/cache_data.rb": "84db88b5ed669667cc1037a34f123681",
+    "lib/puppet/parser/functions/foreman.rb": "519e38af40295964304e198bd60a2131",
+    "lib/puppet/parser/functions/random_password.rb": "64194e2fb3ccd791fe112a183dbe29c3",
+    "lib/puppet/parser/functions/smartvar.rb": "1135655507e691d311cf4e6e65f93556",
+    "lib/puppet/provider/foreman_smartproxy/rest.rb": "91ee045c3568b49398712004b0ffc499",
+    "lib/puppet/type/foreman_smartproxy.rb": "bf5bf5f97eac4aa5a7e06cf585c5d061",
+    "manifests/config/enc.pp": "889ab7ac8cddacc9dc3be5dc8eedf725",
+    "manifests/config/passenger.pp": "1ff67e0b9907a3f5174b0c4620f71ebb",
+    "manifests/config.pp": "bba36727547385791ee0444b03fcee98",
+    "manifests/database/mysql.pp": "c5fcd383314a60f05f158d939f8a2190",
+    "manifests/database/postgresql.pp": "6a9ba5ecedbdd71c99e1dcdeacc025a8",
+    "manifests/database/sqlite.pp": "a7d5624e3a90869ace8ab4eb925c85f1",
+    "manifests/database.pp": "f5531837d18cc2cad8afd18ba83d0f0d",
+    "manifests/init.pp": "e341e17c84e8fd920dbac2f68d241552",
+    "manifests/install/repos/apt.pp": "25f1e7f8e45e38c4f0ab7648cd4a9c05",
+    "manifests/install/repos/yum.pp": "7f12827bd2c7dd221d1b17cc8d9a881a",
+    "manifests/install/repos.pp": "ddd1dba2fbc813a9bb7142256ffdb0fe",
+    "manifests/install.pp": "13290327d6a5a44ae993a50dd43356f6",
+    "manifests/params.pp": "19b65e229347cd9109aaab2dead65054",
+    "manifests/puppetmaster.pp": "af6ec218c0d2e19cacffc276e9cc5c05",
+    "manifests/service.pp": "0015d4ba5864d46892e83b9ee2e38826",
+    "spec/classes/foreman_config_enc_spec.rb": "bc967f6eb71607644fdd3d892446aec4",
+    "spec/classes/foreman_config_passenger_spec.rb": "7ff119b92e96e65fb871839a71631a30",
+    "spec/classes/foreman_config_spec.rb": "9e8cff3a7700309c742962e49aa82a6d",
+    "spec/classes/foreman_database_spec.rb": "cf976c68705a24281607e4034e8595b0",
+    "spec/classes/foreman_install_spec.rb": "cf205825fd00e4ce3c37677b59ce0ee6",
+    "spec/classes/foreman_puppetmaster_spec.rb": "725f3e4776185fff2cd17396214d1e23",
+    "spec/classes/foreman_service_spec.rb": "1211972b706d908eb6f4ccfe1092c46b",
+    "spec/classes/foreman_spec.rb": "a33427408c79d73944ef108c7d313fbe",
+    "spec/defines/foreman_install_repos_apt_spec.rb": "d20775681ada7af1821edcc022f4d1ef",
+    "spec/defines/foreman_install_repos_spec.rb": "89a6e28cdb5ec92ecf1feaa5a88cf7e1",
+    "spec/defines/foreman_install_repos_yum_spec.rb": "3cfd74d7f2618de7854bb64ef04d69c1",
+    "spec/functions/foreman_spec.rb": "c4f93e51384ac6c5fdb3f218affac7fc",
+    "spec/functions/smartvar_spec.rb": "483b52b6c22afdefda170eba34f60ef3",
+    "spec/spec.opts": "19e24badad2823f90a3697dd99105209",
+    "spec/spec_helper.rb": "842001cfefb01d6453fdc56a858f838e",
+    "spec/static_fixtures/fake.host.fqdn.com.yaml": "9d6291510ff8fcb876cbcd29a8918034",
+    "spec/static_fixtures/report-2.6.12-noops.yaml": "050834ecc4a6f1246613a035947eb1f7",
+    "spec/static_fixtures/report-2.6.2-debug.yaml": "64f2e450a4f4a534592fb1c7feb9e5a4",
+    "spec/static_fixtures/report-2.6.5-errors.yaml": "26aff577a9fd98a43e9fbf783b2eb357",
+    "spec/static_fixtures/report-empty.json": "7c3d9012c688a25b1a1f5cbc5efa4e36",
+    "spec/static_fixtures/report-empty.yaml": "614f4b119bf70119ad99b8e528e75deb",
+    "spec/static_fixtures/report-format-0.json": "bce7b7d93eab7766e6afac765fc58da1",
+    "spec/static_fixtures/report-format-0.yaml": "4b38e63de254224596ddd6ce8f352e06",
+    "spec/static_fixtures/report-format-1.json": "fd4d45b4abc5bccd42f5e5de83c5448e",
+    "spec/static_fixtures/report-format-1.yaml": "64f2e450a4f4a534592fb1c7feb9e5a4",
+    "spec/static_fixtures/report-format-2.json": "a3f08df6663f7c2122c47351970e4f93",
+    "spec/static_fixtures/report-format-2.yaml": "b1ee1f3566f0ad8233981aafc0ec870c",
+    "spec/static_fixtures/report-format-3.json": "f992a3aa9d08b9b6f3954b6796b8fe44",
+    "spec/static_fixtures/report-format-3.yaml": "09b47db9ab0738cd2818f1ba7cad6041",
+    "spec/unit/foreman_external_node_spec.rb": "e07b076cc9fc63b949da127182b4a9c5",
+    "spec/unit/foreman_report_processor_spec.rb": "1052d2fdd48da2e0d688c5c7ab239a69",
+    "templates/_header.erb": "bbd537ad07c5cd4ba38d89cd4493402c",
+    "templates/database.yml.erb": "90931db6f9cbeb1d44fb3a69dd1abf22",
+    "templates/external_node_v1.rb.erb": "9cc8031bf32e02d49826e634d007b25c",
+    "templates/external_node_v2.rb.erb": "59e3547a1c4f34d467ab2bee2f111928",
+    "templates/foreman-apache.conf.erb": "e9119fde3592648c49be4f7390f56bf6",
+    "templates/foreman-report_v1.rb.erb": "a83e86b11debc9688b9ec154d2adaa8c",
+    "templates/foreman-report_v2.rb.erb": "911ad0f6db534c593e59b722cfa3baf9",
+    "templates/foreman-vhost.conf.erb": "d6bc1abed14c16f1e16e9339c36147a3",
+    "templates/foreman.default.erb": "0b98637f78727bacb1f6f4d174cb1159",
+    "templates/foreman.sysconfig.erb": "ceb0974ce46b34817e5f1df70ff13828",
+    "templates/settings.yaml.erb": "ec8f5a0e99621d34cc04e7b9cca23a36"
+  }
+}

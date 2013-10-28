@@ -1,0 +1,32 @@
+{
+  "name": "theforeman-apache",
+  "version": "1.3.0",
+  "source": "git://github.com/theforeman/puppet-apache",
+  "author": "theforeman",
+  "license": "GPLv3+",
+  "summary": "Apache HTTP server configuration",
+  "description": "Module for configuring Apache HTTP server for Foreman",
+  "project_page": "http://github.com/theforeman/foreman-installer",
+  "dependencies": [
+    {
+      "name": "theforeman/passenger",
+      "version_requirement": ">= 1.3.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "9eef91148a9b14ec7f9df333daebc746",
+    "Modulefile": "efbd72cf8a730c40476c624e0b8c26bd",
+    "README.md": "fc0d45f973e7c44c3613514aebf7c0d9",
+    "manifests/config.pp": "7eeab8eda00a223d34b7a7b7e0e40816",
+    "manifests/init.pp": "f53525086e13c013880ddd36b808f1fd",
+    "manifests/install.pp": "ce58e6bdb2d34b13e0eedb4a76d264d2",
+    "manifests/params.pp": "4219f11da48b0b3177772ccd1540cd0c",
+    "manifests/service.pp": "0a8a44bd1accf7258636d2742663cf9f",
+    "manifests/site.pp": "f57b0074e9b11b6f9c9cd2d653376d1e",
+    "manifests/ssl.pp": "5247d16369fb2c7877859e328f6f9379",
+    "templates/vhost.conf": "549cc861d7e3cdc072b77f011b7b604c"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "theforeman-git",
+  "version": "1.3.0",
+  "source": "git://github.com/theforeman/puppet-git",
+  "author": "theforeman",
+  "license": "GPLv3+",
+  "summary": "git installation and configuration",
+  "description": "Module for configuring git",
+  "project_page": "http://github.com/theforeman/foreman-installer",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "9eef91148a9b14ec7f9df333daebc746",
+    "Modulefile": "42b7675afc5206424d845c406ee26e2c",
+    "README.md": "b38a17813ef4bb603579835cf7a2932a",
+    "manifests/init.pp": "7e1d425ae40e374258614183a9ccac8f",
+    "manifests/install.pp": "8fd6e4f326d1b0f92031f25780c9d3b9",
+    "manifests/params.pp": "d4a0411c05e060dfdc8069558825d5b7",
+    "manifests/repo.pp": "c218a4251ae3bcd32280b2fe02473349"
+  }
+}

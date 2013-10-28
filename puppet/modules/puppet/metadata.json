@@ -1,0 +1,71 @@
+{
+  "name": "theforeman-puppet",
+  "version": "1.3.0",
+  "source": "git://github.com/theforeman/puppet-puppet",
+  "author": "theforeman",
+  "license": "GPLv3+",
+  "summary": "Puppet agent and server configuration",
+  "description": "Module for installing the Puppet agent and Puppet server",
+  "project_page": "http://github.com/theforeman/foreman-installer",
+  "dependencies": [
+    {
+      "name": "theforeman/apache",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "theforeman/concat_native",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "theforeman/git",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "theforeman/passenger",
+      "version_requirement": ">= 1.3.0"
+    },
+    {
+      "name": "puppetlabs/stdlib"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Gemfile": "d7cfdabd088b72ba34a00572a35e0395",
+    "LICENSE": "9eef91148a9b14ec7f9df333daebc746",
+    "Modulefile": "f2f5897c6aa90469e775f7954c48488b",
+    "README.md": "1b20df6ad54918733785c0a3f1bece70",
+    "Rakefile": "8a602dae0322ee4e370c8ec94db13b9b",
+    "lib/puppet/parser/functions/ip_to_cron.rb": "21808d0697249ff764c744d71295bca5",
+    "manifests/config.pp": "452e62af78d1b1e11f82608e46734d41",
+    "manifests/cron.pp": "77d024a15d0d7d1864f7d2a0e484d637",
+    "manifests/daemon.pp": "7f15dd8a49273b4ac9bacba77cccd0b6",
+    "manifests/init.pp": "0b100db6237b0282d7040d4ed38ac00e",
+    "manifests/install.pp": "b4b09765530700a0a82690f4ed8abbc0",
+    "manifests/params.pp": "c9bf7ebdfa8eb48cecf7f1a713728b7a",
+    "manifests/server/config.pp": "73e834f78807a05c5e971e346cc61074",
+    "manifests/server/env.pp": "f22db0a26bd661eee5ead5d3766aa586",
+    "manifests/server/install.pp": "9ac3c35ab179cd08bc06e38b43d0f89e",
+    "manifests/server/passenger.pp": "0083598829c23d2f4dedec51c9465f0e",
+    "manifests/server/rack.pp": "690b3d27d277054ad5cfbef385a751ac",
+    "manifests/server/service.pp": "5b50c0c6e4a4e195ac99d8f147115ac0",
+    "manifests/server.pp": "34b5c90bccfd816ea3bf1102895b499c",
+    "manifests/service.pp": "a8d5cdf40e4d06a4656bb2efa345ce15",
+    "spec/classes/puppet_init_spec.rb": "dcd517f8b656a08ce36ac9e4b171d990",
+    "spec/classes/puppet_server_config_spec.rb": "e596fdd5dd584293133dc8b3f6989bcc",
+    "spec/classes/puppet_server_passenger_spec.rb": "06b6de330a7710e66b30f1fc440063f5",
+    "spec/classes/puppet_server_spec.rb": "11cb5d3d113d1b796369c599ba5859d0",
+    "spec/spec.opts": "19e24badad2823f90a3697dd99105209",
+    "spec/spec_helper.rb": "66dc7436f1fc5b68aeffc499bff4d996",
+    "templates/_header.erb": "bbd537ad07c5cd4ba38d89cd4493402c",
+    "templates/auth.conf.erb": "0aacf74ac4d7802f3a55644ba5514fa1",
+    "templates/namespaceauth.conf.erb": "6b893e333874eb1aad8f69cd2caaeb9e",
+    "templates/puppet.conf.erb": "9c5f3c2ce2ed7865b45911028274f141",
+    "templates/server/config.ru.2.erb": "8d8e16af652b462ec59957b205a8586a",
+    "templates/server/config.ru.erb": "1ad2ffcd18b7983f2fee182ef832fe28",
+    "templates/server/post-receive.erb": "4bfa1173e73600ac225bff3202c5a429",
+    "templates/server/puppet-vhost.conf.erb": "545d21103876819011fe39e930083a4a",
+    "templates/server/puppet.conf.erb": "283bc8a0205507e58ebf6fbe5689f3a3"
+  }
+}
