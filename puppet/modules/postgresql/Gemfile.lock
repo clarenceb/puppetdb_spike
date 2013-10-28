@@ -6,7 +6,6 @@ GEM
     facter (1.7.2)
     hiera (1.2.1)
       json_pure
-    highline (1.6.20)
     json_pure (1.8.0)
     kwalify (0.7.2)
     metaclass (0.0.1)
@@ -52,13 +51,6 @@ GEM
       systemu (~> 2.5)
     rspec-system-puppet (2.1.0)
       rspec-system (~> 2.0)
-    rspec-system-serverspec (1.0.1)
-      rspec-system (~> 2.0)
-      serverspec (~> 0.0)
-    serverspec (0.10.9)
-      highline
-      net-ssh
-      rspec (>= 2.13.0)
     systemu (2.5.2)
     trollop (2.0)
 
@@ -71,4 +63,3 @@ DEPENDENCIES
   puppetlabs_spec_helper
   rake
   rspec-system-puppet (~> 2.0)
-  rspec-system-serverspec (~> 1.0)

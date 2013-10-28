@@ -1,18 +1,6 @@
 require 'rspec-system/spec_helper'
 require 'rspec-system-puppet/helpers'
-require 'rspec-system-serverspec/helpers'
 require 'tempfile'
-
-include Serverspec::Helper::RSpecSystem
-include Serverspec::Helper::DetectOS
-
-class String
-  # Provide ability to remove indentation from strings, for the purpose of
-  # left justifying heredoc blocks.
-  def unindent
-    gsub(/^#{scan(/^\s*/).min_by{|l|l.length}}/, "")
-  end
-end
 
 module LocalHelpers
   include RSpecSystem::Util
@@ -49,7 +37,7 @@ RSpec.configure do |c|
     shell('puppet module install puppetlabs/stdlib')
     shell('puppet module install puppetlabs/firewall')
     shell('puppet module install puppetlabs/apt')
-    shell('puppet module install puppetlabs/concat')
+    shell('puppet module install ripienaar/concat')
 
     file = Tempfile.new('foo')
     begin

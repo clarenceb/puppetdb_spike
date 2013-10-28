@@ -44,7 +44,6 @@ TEST=""
 FORCE=""
 WARN=""
 SORTARG=""
-ENSURE_NEWLINE=""
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
@@ -52,7 +51,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 ## http://nexenta.org/projects/site/wiki/Personalities
 unset SUN_PERSONALITY
 
-while getopts "o:s:d:tnw:fl" options; do
+while getopts "o:s:d:tnw:f" options; do
 	case $options in
 		o ) OUTFILE=$OPTARG;;
 		d ) WORKDIR=$OPTARG;;
@@ -60,7 +59,6 @@ while getopts "o:s:d:tnw:fl" options; do
 		w ) WARNMSG="$OPTARG";;
 		f ) FORCE="true";;
 		t ) TEST="true";;
-		l ) ENSURE_NEWLINE="true";;
 		* ) echo "Specify output file with -o and fragments directory with -d"
 		    exit 1;;
 	esac
@@ -107,25 +105,16 @@ fi
 
 cd ${WORKDIR}
 
-if [ "x${WARNMSG}" = "x" ]; then
+if [ x${WARNMSG} = "x" ]; then
 	: > "fragments.concat"
 else
 	printf '%s\n' "$WARNMSG" > "fragments.concat"
 fi
 
-if [ x${ENSURE_NEWLINE} != x ]; then
-	find fragments/ -type f -follow -print0 | xargs -0 -I '{}' sh -c 'if [ -n "$(tail -c 1 < {} )" ]; then echo >> {} ; fi'
-fi
-
 # find all the files in the fragments directory, sort them numerically and concat to fragments.concat in the working dir
-IFS_BACKUP=$IFS
-IFS='
-'
-for fragfile in `find fragments/ -type f -follow | LANG=C sort ${SORTARG}`
-do
-    cat $fragfile >> "fragments.concat"
+find fragments/ -type f -follow | sort ${SORTARG} | while read fragfile; do
+	cat "$fragfile" >> "fragments.concat"
 done
-IFS=$IFS_BACKUP
 
 if [ x${TEST} = "x" ]; then
 	# This is a real run, copy the file to outfile
