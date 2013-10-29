@@ -1,4 +1,4 @@
-Puppet Master and Puppet DB Demo
+PuppetDB and Puppet Master Spike
 ================================
 
 First: `vagrant up` to build the VM instance.
@@ -29,4 +29,3 @@ Puppet Modules used:
 puppet module install theforeman/foreman -i puppet/modules
 puppet module install theforeman/puppet -i puppet/modules
 puppet module install puppetlabs/puppetdb -i puppet/modules
-
