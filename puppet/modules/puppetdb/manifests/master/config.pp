@@ -13,6 +13,7 @@
 #   ['puppetdb_server'] - The dns name or ip of the puppetdb server
 #                          (defaults to the certname of the current node)
 #   ['puppetdb_port']   - The port that the puppetdb server is running on (defaults to 8081)
+#   ['use_ssl']         - false if the puppetdb web server will only serve HTTP and not HTTPS requests (default: true)
 #   ['manage_routes']   - If true, the module will overwrite the puppet master's routes
 #                         file to configure it to use puppetdb (defaults to true)
 #   ['manage_storeconfigs'] - If true, the module will manage the puppet master's
@@ -62,6 +63,7 @@
 class puppetdb::master::config(
   $puppetdb_server          = $::fqdn,
   $puppetdb_port            = 8081,
+  $use_ssl                  = true,
   $manage_routes            = true,
   $manage_storeconfigs      = true,
   $manage_report_processor  = false,
@@ -87,6 +89,7 @@ class puppetdb::master::config(
     puppetdb_conn_validator { 'puppetdb_conn':
       puppetdb_server => $manage_config ? { true => $puppetdb_server, default => undef },
       puppetdb_port   => $manage_config ? { true => $puppetdb_port, default => undef },
+      use_ssl         => $manage_config ? { true => $use_ssl, default => undef },
       timeout         => $puppetdb_startup_timeout,
       require         => Package[$terminus_package],
     }

@@ -20,6 +20,10 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   config.vm.network :private_network, ip: "192.168.33.10"
 
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine.
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:

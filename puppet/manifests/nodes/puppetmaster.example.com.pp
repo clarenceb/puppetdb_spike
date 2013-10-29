@@ -28,7 +28,7 @@ node 'puppetmaster.example.com' {
   class { 'puppetdb::master::config':
     puppetdb_server => $::fqdn,
     puppetdb_port   => 8080,
-    #use_ssl         => false,
+    use_ssl         => false,
   }
 
   Package['cronie'] -> Class['::puppet'] -> Class['puppetdb'] -> Class['puppetdb::master::config']

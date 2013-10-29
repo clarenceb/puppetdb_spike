@@ -24,10 +24,13 @@ echo "Configuring host name."
 HOSTNAME=puppetmaster
 DOMAIN=example.com
 FQDN="${HOSTNAME}.${DOMAIN}"
-IPADDRESS=`facter ipaddress`
+IPADDRESS=`facter ipaddress_eth1`
 hostname ${FQDN}
 echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
+
+# Can't be bothered adding iptables rules for now...
+service iptables stop
 
 echo "I am ${HOSTNAME} with ip address ${IPADDRESS}"
 

@@ -11,6 +11,18 @@ On the VM:
     cd /vagrant
     sudo ./papply.sh
 
+On your host:
+
+* Open a browser to `http://localhost:8080`
+
+Further steps:
+
+* Create some puppet agents and register them with the master so that the puppet DB can collect some useful node data.
+
+Note:
+
+* You maybe have to run `sudo ./papply.sh` two or three times due to the way the puppetdb module works - you will see some connection errors (it is eventually consistent though).
+
 Puppet Modules used:
 --------------------
 
