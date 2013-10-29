@@ -24,11 +24,12 @@ echo "Configuring host name."
 HOSTNAME=puppetmaster
 DOMAIN=example.com
 FQDN="${HOSTNAME}.${DOMAIN}"
+IPADDRESS=`facter ipaddress`
 hostname ${FQDN}
-echo "192.168.33.10 ${FQDN} ${HOSTNAME}" >> /etc/hosts
+echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
 
-echo "I am `hostname` with ip address `facter ipaddress`"
+echo "I am ${HOSTNAME} with ip address ${IPADDRESS}"
 
 echo "**** BOOTSTRAP DONE. ****"
 
