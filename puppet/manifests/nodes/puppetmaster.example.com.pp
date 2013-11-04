@@ -12,25 +12,33 @@ node 'puppetmaster.example.com' {
     server_external_nodes => '',
   }
 
-
   # Puppet DB - Single Node Setup
   # See: https://forge.puppetlabs.com/puppetlabs/puppetdb
 
   # Configure puppetdb and its underlying database
   class { 'puppetdb':
-    database       => 'postgres',
-    disable_ssl    => true,
-    listen_address => '0.0.0.0',
-    listen_port    => 8080,
+    puppetdb_version     => latest,
+    database             => 'postgres',
+    disable_ssl          => false,
+    listen_address       => '0.0.0.0',
+    listen_port          => 8080,
+    ssl_listen_address   => $::clientcert,
+    ssl_listen_port      => 8081,
+    open_ssl_listen_port => true,
   }
 
   # Configure the puppet master to use puppetdb
   class { 'puppetdb::master::config':
-    puppetdb_server => $::fqdn,
-    puppetdb_port   => 8080,
-    use_ssl         => false,
+    puppetdb_server         => $::clientcert,
+    puppetdb_port           => 8081,
+    manage_config           => true,
+    manage_routes           => true,
+    manage_storeconfigs     => true,
+    #manage_report_processor => true,
+    #enable_reports          => true,
+    use_ssl                 => true,
+    restart_puppet          => true,
   }
 
   Package['cronie'] -> Class['::puppet'] -> Class['puppetdb'] -> Class['puppetdb::master::config']
 }
-

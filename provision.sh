@@ -29,10 +29,30 @@ hostname ${FQDN}
 echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
 
+# Copy puppet manifests and modules to puppet install dir.
+mkdir -p /etc/puppet/manifests /etc/puppet/environments/production/modules
+cp -r /vagrant/puppet/manifests/* /etc/puppet/manifests/
+cp -r /vagrant/puppet/modules/* /etc/puppet/environments/production/modules/
+chown -R puppet:puppet /etc/puppet/environments/production/modules /etc/puppet/manifests
+
+# Turn on autosign for all hosts
+echo "*" > /etc/puppet/autosign.conf
+
 # Can't be bothered adding iptables rules for now...
 service iptables stop
+chkconfig iptables off
+
+# Initial puppet run
+/vagrant/papply.sh
+
+# Create keystore for puppet db (TODO: move this into the puppet node manifest)
+/usr/sbin/puppetdb-ssl-setup
+
+# Restart it all (just in case)
+service puppetdb restart
+service httpd restart
+service puppet restart # Will also trigger a puppet agent run.
 
 echo "I am ${HOSTNAME} with ip address ${IPADDRESS}"
 
 echo "**** BOOTSTRAP DONE. ****"
-
