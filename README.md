@@ -32,10 +32,6 @@ Further steps:
 * Get HTTPS API working for remote API requests
 * Play around with the API endpoints
 
-Note:
-
-* You maybe have to run `sudo ./papply.sh` two or three times due to the way the puppetdb module works - you will see some connection errors (it is eventually consistent though).
-
 Puppet Modules used:
 --------------------
 
