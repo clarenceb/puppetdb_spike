@@ -8,12 +8,18 @@ The `provision.sh` script will be run automatically.
 
 On the VM:
 
-    cd /vagrant
-    sudo ./papply.sh
+	sudo su
+	# Note sure of the correct sequence but this seems to work ok.
+	puppet agent -t
+	restart service puppetdb
+	restart service httpd
+	restart service puppet
+
 
 On your host:
 
-* Open a browser to `http://localhost:8080`
+* Open a browser to `http://192.168.33.10:8080`
+* You should see the PuppetDB dashboard with 1 node
 
 Further steps:
 
