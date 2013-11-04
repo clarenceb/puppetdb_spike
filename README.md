@@ -21,9 +21,16 @@ On your host:
 * Open a browser to `http://192.168.33.10:8080`
 * You should see the PuppetDB dashboard with 1 node
 
+API test:
+
+    # On the VM, type (remote HTTPS requires that you specify a certificate, a private key, and a CA certificate).
+    curl -H "Accept: application/json" http://localhost:8080/facts/`hostname -f`
+
 Further steps:
 
 * Create some puppet agents and register them with the master so that the puppet DB can collect some useful node data.
+* Get HTTPS API working for remote API requests
+* Play around with the API endpoints
 
 Note:
 
