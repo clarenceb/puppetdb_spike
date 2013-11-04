@@ -1,0 +1,3 @@
+["and",
+  ["=", "type", "Package"],
+  ["~", "title", "^puppet"]]
