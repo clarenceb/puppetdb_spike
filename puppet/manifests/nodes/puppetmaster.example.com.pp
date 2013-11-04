@@ -34,8 +34,8 @@ node 'puppetmaster.example.com' {
     manage_config           => true,
     manage_routes           => true,
     manage_storeconfigs     => true,
-    #manage_report_processor => true,
-    #enable_reports          => true,
+    manage_report_processor => true,
+    enable_reports          => true,
     use_ssl                 => true,
     restart_puppet          => true,
   }
