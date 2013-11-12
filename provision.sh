@@ -48,10 +48,14 @@ chkconfig iptables off
 # Create keystore for puppet db (TODO: move this into the puppet node manifest)
 /usr/sbin/puppetdb-ssl-setup
 
-# Restart it all (just in case)
+# Restart it all 
 service puppetdb restart
 service httpd restart
-service puppet restart # Will also trigger a puppet agent run.
+puppet agent -t
+
+service puppetdb restart
+service httpd restart
+service puppet restart
 
 echo "I am ${HOSTNAME} with ip address ${IPADDRESS}"
 
