@@ -65,10 +65,11 @@ Then: `vagrant ssh puppetboard` to access the VM instance.
 
 On the VM:
 ----------
-cd puppetboard
 
-# Start the web app in the background
-nohup python dev.py &
+    cd puppetboard
+
+    # Start the web app in the background
+    nohup python dev.py &
 
 On your host:
 -------------
