@@ -13,17 +13,33 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box"
 
-  # Shell provisioner
-  config.vm.provision "shell", path: "provision.sh"
+  # Puppet Master, Puppet DB, PostgreSQL machine
+  config.vm.define "puppetdb" do |puppetdb|
+      # Shell provisioner
+      puppetdb.vm.provision "shell", path: "provision/puppetdb.sh"
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network :private_network, ip: "192.168.33.10"
+      # Create a private network, which allows host-only access to the machine
+      # using a specific IP.
+      puppetdb.vm.network :private_network, ip: "192.168.33.10"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine.
-  config.vm.network :forwarded_port, guest: 8080, host: 8080  # Puppet DB dashboard
-  config.vm.network :forwarded_port, guest: 8081, host: 8081  # Puppet DB API with SSL
+      # Create a forwarded port mapping which allows access to a specific port
+      # within the machine from a port on the host machine.
+      puppetdb.vm.network :forwarded_port, guest: 8080, host: 8080  # Puppet DB dashboard
+      puppetdb.vm.network :forwarded_port, guest: 8081, host: 8081  # Puppet DB API with SSL
+  end
+
+  config.vm.define "puppetboard" do |puppetboard|
+      # Shell provisioner
+      puppetboard.vm.provision "shell", path: "provision/puppetboard.sh"
+
+      # Create a private network, which allows host-only access to the machine
+      # using a specific IP.
+      puppetboard.vm.network :private_network, ip: "192.168.33.11"
+
+      # Create a forwarded port mapping which allows access to a specific port
+      # within the machine from a port on the host machine.
+      puppetboard.vm.network :forwarded_port, guest: 5000, host: 5000  # Puppetboard web app
+  end
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
