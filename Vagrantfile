@@ -41,6 +41,19 @@ Vagrant.configure("2") do |config|
       puppetboard.vm.network :forwarded_port, guest: 5000, host: 5000  # Puppetboard web app
   end
 
+  config.vm.define "dashboard" do |dashboard|
+      # Shell provisioner
+      dashboard.vm.provision "shell", path: "provision/dashboard.sh"
+
+      # Create a private network, which allows host-only access to the machine
+      # using a specific IP.
+      dashboard.vm.network :private_network, ip: "192.168.33.12"
+
+      # Create a forwarded port mapping which allows access to a specific port
+      # within the machine from a port on the host machine.
+      dashboard.vm.network :forwarded_port, guest: 3030, host: 3030  # Dashboard web app
+  end
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:

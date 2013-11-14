@@ -77,6 +77,30 @@ On your host:
 * Open a browser to `http://localhost:5000`
 
 
+Dashboard
+==========
+
+This is an example dashboard using [Dashing](http://shopify.github.io/dashing/), a dashboard framework.
+The dashboard shows how to integrate with PuppetDB for building custom apps.
+
+First: `vagrant up dashboard` to build the VM instance.
+Note: The `provision/dashboard.sh` script will be run automatically to provision the machine.
+
+Then: `vagrant ssh dashboard` to access the VM instance.
+
+On the VM:
+----------
+
+    sudo su
+    source ~/.bash_profile
+    nohup dashing start &
+
+On your host:
+-------------
+
+* Open a browser to `http://localhost:3030`
+
+
 TODO
 ====
 * Mount /vagrant/puppet/modules and /vagrant/puppet/manifest dir to /etc/puppet/manifests and /etc/puppet/modules
@@ -84,3 +108,4 @@ TODO
 * Make the puppetboard a puppet agent and manage puppetboard via puppet so we have more nodes in puppetdb
 * DRY up the provisioning scripts (or replace with puppet agent provisioner)
 * Create a DNS instance to avoid /etc/hosts and again, to have another puppetised node in PuppetDB.
+* Mount /etc/cache/yum to a local dir to avoid downloading RPMs over and over when rebuilding VMs (see: [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier))
