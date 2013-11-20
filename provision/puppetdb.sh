@@ -6,7 +6,7 @@ echo "Removing old versions of puppet and facter installed in this box."
 yum remove -y puppet facter
 
 echo "Installing some other useful utils."
-yum install -y tree vim
+yum install -y tree vim rsync
 
 echo "Adding puppetlabs EL6 yum repo."
 rpm -ivh http://yum.puppetlabs.com/el/6/products/i386/puppetlabs-release-6-7.noarch.rpm
@@ -30,11 +30,7 @@ echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
 
 # Copy puppet manifests and modules to puppet install dir.
-mkdir -p /etc/puppet/manifests /etc/puppet/modules /etc/puppet/common-modules
-cp -r /vagrant/puppet/manifests/* /etc/puppet/manifests/
-cp -r /vagrant/puppet/modules/* /etc/puppet/modules/
-cp -r /vagrant/puppet/common-modules/* /etc/puppet/common-modules/
-chown -R puppet:puppet /etc/puppet/modules /etc/puppet/common-modules /etc/puppet/manifests
+/vagrant/sync_manifests.sh
 
 # Turn on autosign for all hosts
 echo "*" > /etc/puppet/autosign.conf

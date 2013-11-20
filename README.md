@@ -102,6 +102,19 @@ On your host:
 * Open a browser to `http://localhost:3030`
 
 
+Exported Resources
+==================
+
+PuppetDB can be used for exporting resources from nodes so that other nodes can use this information in their manifests.
+
+For example, monitoring hosts with Nagios, see [Exported Resources with Nagios](http://docs.puppetlabs.com/guides/exported_resources.html).
+
+Machines `dashboard.example.com` and `puppetboard.example.com` export nagios host and service entries to PuppetDB.
+The `puppetmaster.example.com` machine then collects these exported resources, dynamically creating nagios configuration files so
+that the nagios can monitor these hosts.
+
+See the Puppet module `puppet/modules/nagios` and the node manifests for further details.
+
 TODO
 ====
 * Mount /vagrant/puppet/modules and /vagrant/puppet/manifest dir to /etc/puppet/manifests and /etc/puppet/modules

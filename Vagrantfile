@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
       # within the machine from a port on the host machine.
       puppetdb.vm.network :forwarded_port, guest: 8080, host: 8080  # Puppet DB dashboard
       puppetdb.vm.network :forwarded_port, guest: 8081, host: 8081  # Puppet DB API with SSL
+      puppetdb.vm.network :forwarded_port, guest: 80,   host: 8888  # Nagios web console
   end
 
   config.vm.define "puppetboard" do |puppetboard|

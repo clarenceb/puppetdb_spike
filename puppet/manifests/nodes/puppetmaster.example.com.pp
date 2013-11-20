@@ -44,4 +44,7 @@ node 'puppetmaster.example.com' {
   }
 
   Package['cronie'] -> Class['::puppet'] -> Class['puppetdb'] -> Class['puppetdb::master::config']
+
+  # Nagios for exported resources demo
+  include nagios::monitor
 }

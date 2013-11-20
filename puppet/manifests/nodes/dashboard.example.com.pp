@@ -12,4 +12,7 @@ node 'dashboard.example.com' {
   }
 
   Package['cronie'] -> Class['::puppet']
+
+  # Exported resources
+  include nagios::target::host
 }
