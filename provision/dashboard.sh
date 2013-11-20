@@ -2,6 +2,15 @@
 
 echo "**** BOOTSTRAPPING ****"
 
+echo "Removing old versions of puppet and facter installed in this box."
+yum remove -y puppet facter
+
+echo "Adding puppetlabs EL6 yum repo."
+rpm -ivh http://yum.puppetlabs.com/el/6/products/i386/puppetlabs-release-6-7.noarch.rpm
+
+echo "Installing the latest version of puppet and facter."
+yum install -y puppet facter
+
 echo "Adding EPL repo."
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
@@ -13,6 +22,9 @@ IPADDRESS=`facter ipaddress_eth1`
 hostname ${FQDN}
 echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
+
+# Puppetmaster
+echo "192.168.33.10 puppetmaster.example.com puppetmaster" >> /etc/hosts
 
 # Can't be bothered adding iptables rules for now...
 service iptables stop
@@ -42,5 +54,8 @@ rbenv rehash
 echo "To start the dashboard web app, run: nohup dashing start &"
 
 echo "I am ${HOSTNAME} with ip address ${IPADDRESS}"
+
+echo "Running puppet agent..."
+puppet agent -t --server puppetmaster.example.com
 
 echo "**** BOOTSTRAP DONE. ****"

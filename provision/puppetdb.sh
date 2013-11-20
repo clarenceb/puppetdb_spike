@@ -30,10 +30,11 @@ echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
 
 # Copy puppet manifests and modules to puppet install dir.
-mkdir -p /etc/puppet/manifests /etc/puppet/environments/production/modules
+mkdir -p /etc/puppet/manifests /etc/puppet/modules /etc/puppet/common-modules
 cp -r /vagrant/puppet/manifests/* /etc/puppet/manifests/
-cp -r /vagrant/puppet/modules/* /etc/puppet/environments/production/modules/
-chown -R puppet:puppet /etc/puppet/environments/production/modules /etc/puppet/manifests
+cp -r /vagrant/puppet/modules/* /etc/puppet/modules/
+cp -r /vagrant/puppet/common-modules/* /etc/puppet/common-modules/
+chown -R puppet:puppet /etc/puppet/modules /etc/puppet/common-modules /etc/puppet/manifests
 
 # Turn on autosign for all hosts
 echo "*" > /etc/puppet/autosign.conf

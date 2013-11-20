@@ -22,6 +22,14 @@ SCHEDULER.every '10s' do
   last_unreported_nodes_count = current_unreported_node_count
   current_unreported_node_count = all_nodes.select { |n| n[:status] == "failed" }.size
 
+  #TODO
+  # top n - modified host list? or just host list (truncated?)
+  # avg memory free?
+  # graph (convergence)
+  # text (hello	)
+  # list (buzzwords)
+  # meter (synergy)
+
   send_event('node_count', { current: current_node_count, last: last_node_count })
   send_event('changed_count', { current: current_changed_node_count, last: last_changed_nodes_count })
   send_event('failed_count', { current: current_failed_node_count, last: last_failed_nodes_count })

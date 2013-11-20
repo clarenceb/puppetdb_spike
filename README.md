@@ -48,9 +48,9 @@ Further steps:
 Puppet Modules used:
 --------------------
 
-* `puppet module install theforeman/foreman -i puppet/modules`
-* `puppet module install theforeman/puppet -i puppet/modules`
-* `puppet module install puppetlabs/puppetdb -i puppet/modules`
+* `puppet module install theforeman/foreman -i puppet/common-modules`
+* `puppet module install theforeman/puppet -i puppet/common-modules`
+* `puppet module install puppetlabs/puppetdb -i puppet/common-modules`
 
 
 Puppetboard
@@ -93,7 +93,8 @@ On the VM:
 
     sudo su
     source ~/.bash_profile
-    nohup dashing start &
+    cd /vagrant/dashboard/webapp
+    nohup bundle exec dashing start &
 
 On your host:
 -------------
@@ -104,8 +105,8 @@ On your host:
 TODO
 ====
 * Mount /vagrant/puppet/modules and /vagrant/puppet/manifest dir to /etc/puppet/manifests and /etc/puppet/modules
+* -or- create script which rsyncs the files to /etc/puppet (useful for making breaking changes for demo, etc)
 * Provision puppetdb machine with puppet apply provisioner
-* Make the puppetboard a puppet agent and manage puppetboard via puppet so we have more nodes in puppetdb
 * DRY up the provisioning scripts (or replace with puppet agent provisioner)
 * Create a DNS instance to avoid /etc/hosts and again, to have another puppetised node in PuppetDB.
 * Mount /etc/cache/yum to a local dir to avoid downloading RPMs over and over when rebuilding VMs (see: [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier))

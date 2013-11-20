@@ -7,9 +7,12 @@ node 'puppetmaster.example.com' {
 
   # Puppet master and agent
   class { '::puppet':
-    server                => true,
-    server_reports        => 'store',
-    server_external_nodes => '',
+    runinterval                => '5m',
+    server                     => true,
+    server_reports             => 'store',
+    server_external_nodes      => '',
+    server_manifest_path       => '/etc/puppet/manifests',
+    server_common_modules_path => ['/etc/puppet/common-modules', '/etc/puppet/modules'],
   }
 
   # Puppet DB - Single Node Setup
