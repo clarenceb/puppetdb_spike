@@ -30,7 +30,7 @@ echo "${IPADDRESS} ${FQDN} ${HOSTNAME}" >> /etc/hosts
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=${FQDN}/" /etc/sysconfig/network
 
 # Copy puppet manifests and modules to puppet install dir.
-/vagrant/sync_manifests.sh
+/vagrant/scripts/sync_manifests.sh
 
 # Turn on autosign for all hosts
 echo "*" > /etc/puppet/autosign.conf

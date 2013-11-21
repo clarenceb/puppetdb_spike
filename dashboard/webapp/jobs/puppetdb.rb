@@ -12,7 +12,7 @@ SCHEDULER.every '10s' do
 
   last_node_count = current_node_count
   current_node_count = all_nodes.size
-
+  
   last_changed_nodes_count = current_changed_node_count
   current_changed_node_count = all_nodes.select { |n| n[:status] == "changed" }.size
 

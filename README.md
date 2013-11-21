@@ -1,11 +1,17 @@
 PuppetDB and Puppet Master Spike
 ================================
 
+Overview
+--------
+
+This is a demo/playground to try out and learn about PuppetDB, Puppet Master, Puppet Agents, Exported Resources, Puppetboard, Nagios, and Dashing framework.
+
 Prerequisites:
 --------------
 
 * Virtualbox 4.2.x+ - [See downloads](https://www.virtualbox.org/wiki/Downloads)
 * Vagrant 1.3.x+ - [See downloads](http://downloads.vagrantup.com/)
+* Install the [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) plugin: `vagrant plugin install vagrant-cachier`
 * Centos 6.3 64-bit Vagrant box (or similar RHEL/Centos version) - [Download from here](https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box)
     * Note: `vagrant up` will download the box for you the first time if you don't have it.
 
@@ -18,7 +24,8 @@ On your host:
 -------------
 
 * Open a browser to `http://localhost:8080`
-* You should see the PuppetDB dashboard with 1 node
+* You should see the PuppetDB dashboard with 1 node (initially)
+* Open a browser to `http://localhost:8888/nagios` to see the Nagios console (see `Exported Resources` section below).
 
 API test:
 ---------
@@ -44,6 +51,7 @@ Further steps:
 * Create some puppet agents and register them with the master so that the puppet DB can collect some useful node data.
 * Get HTTPS API working for remote API requests
 * Play around with the API endpoints
+* If you make manifest changes in `/vagrant/puppet` run `/vagrant/scripts/sync_manifests.sh` on the `puppetdb` VM to update the puppet master's manifests.
 
 Puppet Modules used:
 --------------------
@@ -66,15 +74,13 @@ Then: `vagrant ssh puppetboard` to access the VM instance.
 On the VM:
 ----------
 
-    cd puppetboard
-
-    # Start the web app in the background
-    nohup python dev.py &
+    /vagrant/scripts/puppetboard.sh
 
 On your host:
 -------------
 
 * Open a browser to `http://localhost:5000`
+* You should see the Puppetboard dashboard with 2 nodes now
 
 
 Dashboard
@@ -91,15 +97,14 @@ Then: `vagrant ssh dashboard` to access the VM instance.
 On the VM:
 ----------
 
-    sudo su
-    source ~/.bash_profile
-    cd /vagrant/dashboard/webapp
-    nohup bundle exec dashing start &
+    /vagrant/script/dashboard.sh
 
 On your host:
 -------------
 
-* Open a browser to `http://localhost:3030`
+* Open a browser to `http://localhost:3030` to see the Dashing framework-based dashboard
+* Open a browser to `http://localhost:5000`
+* You should see the Puppetboard dashboard with 3 nodes now
 
 
 Exported Resources
@@ -122,4 +127,3 @@ TODO
 * Provision puppetdb machine with puppet apply provisioner
 * DRY up the provisioning scripts (or replace with puppet agent provisioner)
 * Create a DNS instance to avoid /etc/hosts and again, to have another puppetised node in PuppetDB.
-* Mount /etc/cache/yum to a local dir to avoid downloading RPMs over and over when rebuilding VMs (see: [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier))

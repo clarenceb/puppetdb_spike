@@ -20,6 +20,22 @@ class nagios::monitor {
        require  => Package['nagios'],
     }
 
+    file_line { 'Nagios host exported resources configuration':
+       ensure  => present,
+       path    => '/etc/nagios/nagios.cfg',
+       line    => 'cfg_file=/etc/nagios/nagios_host.cfg',
+       require => File['/etc/nagios/nagios_host.cfg'],
+       notify  => Service['nagios'],
+    }
+
+    file_line { 'Nagios service exported resources configuration':
+       ensure  => present,
+       path    => '/etc/nagios/nagios.cfg',
+       line    => 'cfg_file=/etc/nagios/nagios_service.cfg',
+       require => File['/etc/nagios/nagios_service.cfg'],   
+       notify  => Service['nagios'],
+    }
+
     service { 'nagios':
       ensure    => running,
       enable    => true,

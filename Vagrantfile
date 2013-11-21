@@ -13,8 +13,13 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box"
 
+  # vagrant-cachier (see: https://github.com/fgrehm/vagrant-cachier)
+  config.cache.enable :yum
+  config.cache.enable :gem
+  config.cache.scope = :machine
+
   # Puppet Master, Puppet DB, PostgreSQL machine
-  config.vm.define "puppetdb" do |puppetdb|
+  config.vm.define "puppetdb", :primary => true do |puppetdb|
       # Shell provisioner
       puppetdb.vm.provision "shell", path: "provision/puppetdb.sh"
 
