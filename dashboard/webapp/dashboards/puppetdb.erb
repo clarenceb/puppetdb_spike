@@ -1,16 +1,32 @@
 <% content_for :title do %>Puppet DB<% end %>
 <div class="gridster">
   <ul>
+    <!-- Node counts -->
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="node_count" data-view="Number" data-title="Node Count" data-moreinfo="" data-prefix=""></div>
     </li>
     <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="changed_count" data-view="Number" data-title="Changed Nodes" data-moreinfo="" data-prefix="" style="background-color:#ff9618"></div>
     </li>
+    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="unreported_count" data-view="Number" data-title="Unreported Nodes" data-moreinfo="" data-prefix="" style="background-color:#4b4b4b"></div>
+    </li>
     <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
       <div data-id="failed_count" data-view="Number" data-title="Failed Nodes" data-moreinfo="" data-prefix="" style="background-color:#dc5945"></div>
     </li>
-    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="unreported_count" data-view="Number" data-title="Unreported Nodes" data-moreinfo="" data-prefix="" style="background-color:#4b4b4b"></div>
+
+    <!-- Memory usage -->
+    <li data-row="1" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="memory_usage" data-view="Meter" data-title="Puppet Master Memory Usage" data-min="0" data-max="100"></div>
+    </li>
+
+    <!-- Server list -->
+    <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">
+      <div data-id="puppet_agents" data-view="List" data-unordered="true" data-title="Puppet Agents" data-moreinfo="Active Puppet Agents"></div>
+    </li>
+
+    <!-- Random fact -->
+    <li data-row="2" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="random_fact" data-view="Text" data-title="Puppet Master Fact" data-text="" data-moreinfo="Randomly selected puppetmaster.example.com facts"></div>
     </li>
 </div>

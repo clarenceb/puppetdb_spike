@@ -45,6 +45,10 @@ def query(endpoint, options = {})
   end
 end
 
+def facts(node_name)
+  query('nodes', :path => "#{node_name}/facts")
+end
+
 def nodes(options)
 	default_options = { :name => nil, :query => nil, :unreported => 2, :with_status => false }
 	options         = default_options.merge(options)
@@ -64,7 +68,7 @@ def nodes(options)
   for node in nodes
   	node['unreported_time'] = nil
     node['status'] = nil
-    status = events_for_node(latest_events, node['name']) if with_status
+    status = filter_events_for_node(latest_events, node['name']) if with_status
 
     # node status from events
     if with_status && !status.empty?
@@ -99,6 +103,6 @@ def nodes(options)
   results
 end
 
-def events_for_node latest_events, node_name
+def filter_events_for_node latest_events, node_name
   latest_events.find_all { |event| event['subject']['title'] == node_name }
 end
