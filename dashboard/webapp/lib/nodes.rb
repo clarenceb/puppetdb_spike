@@ -67,7 +67,7 @@ def nodes(options)
     status = events_for_node(latest_events, node['name']) if with_status
 
     # node status from events
-    if with_status && status
+    if with_status && !status.empty?
       status = status[0]
       node['events'] = status 
       node['status'] = 'changed' if status['successes'] > 0
