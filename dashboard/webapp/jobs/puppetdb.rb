@@ -1,26 +1,34 @@
 require File.join(File.dirname(__FILE__), '..', 'lib', 'nodes')
 
-current_node_count = 0
-current_changed_node_count = 0
-current_failed_node_count = 0
-current_unreported_node_count = 0
+current = {
+  :node_count       => 0,
+  :changed_count    => 0,
+  :failed_count     => 0,
+  :unreported_count => 0
+}
+
+last = current.clone
+
+def update_node_count!(current, last, all_nodes, count_type)
+  count_key = "#{count_type}_count".to_sym
+  last[count_key] = current[count_key]
+  if count_key == :node_count
+    current[count_key] = all_nodes.size
+  else
+    current[count_key] = all_nodes.select { |n| n[:status] == count_type.to_s }.size
+  end
+  send_event(count_key.to_s, { current: current[count_key], last: last[count_key] })
+end
+
+def update_node_counts! current, last, all_nodes
+  puts "Updating counts for nodes: #{all_nodes}"
+  [:node, :changed, :failed, :unreported].each do |count_type|
+    update_node_count!(current, last, all_nodes, count_type)
+  end
+end
 
 SCHEDULER.every '10s' do
-  all_nodes = nodes(:with_status => true)
-
-  puts "PUPPETDB - JOB - ALL_NODES: #{all_nodes}"
-
-  last_node_count = current_node_count
-  current_node_count = all_nodes.size
-  
-  last_changed_nodes_count = current_changed_node_count
-  current_changed_node_count = all_nodes.select { |n| n[:status] == "changed" }.size
-
-  last_failed_nodes_count = current_failed_node_count
-  current_failed_node_count = all_nodes.select { |n| n[:status] == "failed" }.size
-
-  last_unreported_nodes_count = current_unreported_node_count
-  current_unreported_node_count = all_nodes.select { |n| n[:status] == "failed" }.size
+  update_node_counts! current, last, nodes(:with_status => true)
 
   #TODO
   # top n - modified host list? or just host list (truncated?)
@@ -29,9 +37,4 @@ SCHEDULER.every '10s' do
   # text (hello	)
   # list (buzzwords)
   # meter (synergy)
-
-  send_event('node_count', { current: current_node_count, last: last_node_count })
-  send_event('changed_count', { current: current_changed_node_count, last: last_changed_nodes_count })
-  send_event('failed_count', { current: current_failed_node_count, last: last_failed_nodes_count })
-  send_event('unreported_count', { current: current_unreported_node_count, last: last_unreported_nodes_count })
 end
