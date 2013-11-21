@@ -15,7 +15,7 @@ def update_node_count!(current, last, all_nodes, count_type)
   if count_key == :node_count
     current[count_key] = all_nodes.size
   else
-    current[count_key] = all_nodes.select { |n| n[:status] == count_type.to_s }.size
+    current[count_key] = all_nodes.select { |n| n['status'] == count_type.to_s }.size
   end
   send_event(count_key.to_s, { :current => current[count_key], :last => last[count_key] })
 end
